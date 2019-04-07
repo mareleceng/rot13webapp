@@ -27,18 +27,13 @@ def rot13(usertext):
              encryp_text+= chr(test)
          else:
              encryp_text+= chr(fac)  
-    return encryp_text
-
-
-    
+    return encryp_text   
 import os
 import webapp2
 import jinja2
 
-template_dir= os.path.join(os.path.dirname('F:/'),'rot13webapp')
-                           
-jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
-                               autoescape = True)
+template_dir= os.path.join(os.path.dirname('F:/'),'rot13webapp')                         
+jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir))                              
 
 class Handler(webapp2.RequestHandler):
     def write(self, *a, **kw):
@@ -55,7 +50,7 @@ class Mainpage(Handler):
     def get(self):
         usertext = self.request.get('text')
         text = rot13(usertext)
-        self.render('form13.html',text=text)     
+        self.render('form13',text=text)     
 
 app=webapp2.WSGIApplication([('/', Mainpage)
                              ],                                  
